@@ -1,0 +1,62 @@
+<?xml version='1.1' encoding='UTF-8'?>
+<xwikidoc version="1.3" reference="AdvHelpDashboardCodeSpace.AdvantumHelpUrlParamsResolver" locale="">
+  <web>AdvHelpDashboardCodeSpace</web>
+  <name>AdvantumHelpUrlParamsResolver</name>
+  <language/>
+  <defaultLanguage>en</defaultLanguage>
+  <translation>0</translation>
+  <creator>XWiki.admin</creator>
+  <creationDate>1517505784000</creationDate>
+  <parent>AdvHelpDashboardCodeSpace.WebHome</parent>
+  <author>XWiki.admin</author>
+  <contentAuthor>XWiki.admin</contentAuthor>
+  <date>1517511998000</date>
+  <contentUpdateDate>1517511998000</contentUpdateDate>
+  <version>5.1</version>
+  <title>AdvantumHelpUrlParamsResolver</title>
+  <comment/>
+  <minorEdit>false</minorEdit>
+  <syntaxId>xwiki/2.1</syntaxId>
+  <hidden>true</hidden>
+  <content>{{velocity}}&#xd;
+## Retrieving request query parameters&#xd;
+#set($application = $request.application)&#xd;
+#set($applicationVersion = $request.version)&#xd;
+#set($uniqueTokenId = $request.uniqueTokenId)&#xd;
+&#xd;
+#if(!$application)&#xd;
+    **application** required url query parameter was not found&#xd;
+#else&#xd;
+    #set($application = "%" + $application.replace(".", "\\.") + "%")&#xd;
+#end&#xd;
+&#xd;
+#if(!$applicationVersion)&#xd;
+    **version** required url query parameter was not found&#xd;
+#else&#xd;
+    #set($applicationVersion = "%" + $applicationVersion.replace(".", "\\.") + "%")&#xd;
+#end&#xd;
+&#xd;
+#if(!$uniqueTokenId)&#xd;
+    **uniqueTokenId** required url query parameter was not found&#xd;
+#end&#xd;
+&#xd;
+#if($application &amp;&amp; $applicationVersion &amp;&amp; $uniqueTokenId)&#xd;
+    ## Creating XWQL query&#xd;
+    #set($xwql = "where doc.object(AdvHelpDashboardCodeSpace.AdvantumHelpClass).uniqueTokenId = :uniqueTokenId and doc.fullName like :application and doc.fullName like :applicationVersion")&#xd;
+    #set($query = $services.query.xwql($xwql).bindValue("uniqueTokenId", $uniqueTokenId).bindValue("application", $application).bindValue("applicationVersion", $applicationVersion).setLimit(1))&#xd;
+&#xd;
+    ## Getting the query result&#xd;
+    #set($results = $query.execute())&#xd;
+&#xd;
+    #if($results.empty)&#xd;
+      No Help content has being created yet for this page.&#xd;
+    #else&#xd;
+      #set($item = $results.get(0))&#xd;
+      #set($helpContent = $xwiki.getDocument($item))&#xd;
+      ${helpContent.display("content")}&#xd;
+    #end&#xd;
+#else&#xd;
+    //No help content could be retrieved//&#xd;
+#end&#xd;
+{{/velocity}}</content>
+</xwikidoc>
