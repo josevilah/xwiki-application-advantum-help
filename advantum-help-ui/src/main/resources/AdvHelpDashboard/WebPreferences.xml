@@ -1,29 +1,29 @@
 <?xml version='1.1' encoding='UTF-8'?>
-<xwikidoc version="1.3" reference="AdvHelpDashboardCodeSpace.WebPreferences" locale="">
-  <web>AdvHelpDashboardCodeSpace</web>
+<xwikidoc version="1.3" reference="AdvHelpDashboard.WebPreferences" locale="">
+  <web>AdvHelpDashboard</web>
   <name>WebPreferences</name>
   <language/>
   <defaultLanguage>en</defaultLanguage>
   <translation>0</translation>
   <creator>XWiki.admin</creator>
-  <creationDate>1517527213000</creationDate>
-  <parent>AdvHelpDashboardCodeSpace.WebHome</parent>
+  <creationDate>1518124653000</creationDate>
+  <parent>AdvHelpDashboard.WebHome</parent>
   <author>XWiki.admin</author>
   <contentAuthor>XWiki.admin</contentAuthor>
-  <date>1518124416000</date>
-  <contentUpdateDate>1517527213000</contentUpdateDate>
-  <version>1.3</version>
+  <date>1518124663000</date>
+  <contentUpdateDate>1518124653000</contentUpdateDate>
+  <version>1.7</version>
   <title>Preferences</title>
-  <comment>allow script right for XWiki.XWikiAdminGroup</comment>
+  <comment>allow admin right for XWiki.XWikiAdminGroup</comment>
   <minorEdit>true</minorEdit>
   <syntaxId>xwiki/2.1</syntaxId>
   <hidden>true</hidden>
   <content/>
   <object>
-    <name>AdvHelpDashboardCodeSpace.WebPreferences</name>
+    <name>AdvHelpDashboard.WebPreferences</name>
     <number>0</number>
     <className>XWiki.XWikiGlobalRights</className>
-    <guid>94f3fa24-24cf-4009-a7cb-9bbe0eba1c71</guid>
+    <guid>3e30563a-8693-4dd6-8401-f8dd79bf1fbd</guid>
     <class>
       <name>XWiki.XWikiGlobalRights</name>
       <customClass/>
@@ -96,14 +96,14 @@
       <groups>XWiki.XWikiAdminGroup</groups>
     </property>
     <property>
-      <levels>comment,edit,delete,admin,view,script</levels>
+      <levels>view,comment,edit,script,delete,admin</levels>
     </property>
   </object>
   <object>
-    <name>AdvHelpDashboardCodeSpace.WebPreferences</name>
+    <name>AdvHelpDashboard.WebPreferences</name>
     <number>0</number>
     <className>XWiki.XWikiPreferences</className>
-    <guid>b1e9c5ae-d532-4722-8b62-e75138b214dc</guid>
+    <guid>852b6774-45ee-459a-868d-4bb3d69de649</guid>
     <class>
       <name>XWiki.XWikiPreferences</name>
       <customClass/>
