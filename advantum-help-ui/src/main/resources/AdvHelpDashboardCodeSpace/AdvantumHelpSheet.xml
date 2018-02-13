@@ -6,47 +6,54 @@
   <defaultLanguage>en</defaultLanguage>
   <translation>0</translation>
   <creator>XWiki.admin</creator>
-  <creationDate>1517527213000</creationDate>
+  <creationDate>1518471483000</creationDate>
   <parent>AdvHelpDashboardCodeSpace.AdvantumHelpClass</parent>
   <author>XWiki.admin</author>
   <contentAuthor>XWiki.admin</contentAuthor>
-  <date>1518137562000</date>
-  <contentUpdateDate>1518127931000</contentUpdateDate>
-  <version>1.12</version>
-  <title>#if($doc.name == 'AdvantumHelpSheet')AdvantumHelpSheet#{else}$services.display.title($doc, {'displayerHint':
-    'default'})#end
-  </title>
+  <date>1518564401000</date>
+  <contentUpdateDate>1518564381000</contentUpdateDate>
+  <version>1.17</version>
+  <title>#if($doc.name == 'AdvantumHelpSheet')AdvantumHelpSheet#{else}$services.display.title($doc, {'displayerHint':    'default'})#end  </title>
   <comment/>
   <minorEdit>true</minorEdit>
   <syntaxId>xwiki/2.1</syntaxId>
   <hidden>true</hidden>
-  <content>{{groovy}}
-    import java.util.UUID;
-    String newUUID = UUID.randomUUID();
-    xcontext.put("newUUID", newUUID);
-{{/groovy}}
-
-{{velocity}}
-## You can modify this page to customize the presentation of your object.
-## At first you should keep the default presentation and just save the document.
-#set($advHelp = $doc.getObject('AdvHelpDashboardCodeSpace.AdvantumHelpClass'))
-#if($advHelp)
-    $doc.use('AdvHelpDashboardCodeSpace.AdvantumHelpClass')
-    #if ($xcontext.action == 'view')
-        $doc.display('content')
-    #else
-        #if ($doc.isNew())
-            $advHelp.set('uniqueTokenId', $xcontext.get('newUUID'))
-        #end
-        #set($class = $doc.getObject('AdvHelpDashboardCodeSpace.AdvantumHelpClass').xWikiClass)
-        #foreach($prop in $class.properties)
-            ; $prop.prettyName
-            : $doc.display($prop.getName())
-
-        #end
-    #end
-#else
-    $services.localization.render('platform.adv.help.dashboard.sheet')
-#end
+  <content>{{groovy}}&#xd;
+    String space = doc.getSpace();&#xd;
+    String title = doc.getTitle();&#xd;
+    String fullPath = space.replace(".WebHome", "").concat(".").concat(title);&#xd;
+    String[] split = fullPath.replace("\\.", "{#}").split("\\.");&#xd;
+    String newUUID = "";&#xd;
+    for (int i = 0; i &lt; split.length; i++) {&#xd;
+        String chunk = split[i].replace("{#}", ".");&#xd;
+        if (!chunk.matches("^(?!\\.)(v?\\d+(\\.\\d+)+)(?:[-.][A-Z]+)?(?![\\d.])\$")) {&#xd;
+            newUUID += (i > 0 ? "_" : "") + chunk.replaceAll(" ", "_").toLowerCase();&#xd;
+        }&#xd;
+    }&#xd;
+    xcontext.put("newUUID", newUUID);&#xd;
+{{/groovy}}&#xd;
+&#xd;
+{{velocity}}&#xd;
+## You can modify this page to customize the presentation of your object.&#xd;
+## At first you should keep the default presentation and just save the document.&#xd;
+#set($advHelp = $doc.getObject('AdvHelpDashboardCodeSpace.AdvantumHelpClass'))&#xd;
+#if($advHelp)&#xd;
+    $doc.use('AdvHelpDashboardCodeSpace.AdvantumHelpClass')&#xd;
+    #if ($xcontext.action == 'view')&#xd;
+        $doc.display('content')&#xd;
+    #else&#xd;
+        #if ($doc.isNew())&#xd;
+            $advHelp.set('uniqueTokenId', $xcontext.get('newUUID'))&#xd;
+        #end&#xd;
+        #set($class = $doc.getObject('AdvHelpDashboardCodeSpace.AdvantumHelpClass').xWikiClass)&#xd;
+        #foreach($prop in $class.properties)&#xd;
+            ; $prop.prettyName&#xd;
+            : $doc.display($prop.getName())&#xd;
+&#xd;
+        #end&#xd;
+    #end&#xd;
+#else&#xd;
+    $services.localization.render('platform.adv.help.dashboard.sheet')&#xd;
+#end&#xd;
 {{/velocity}}</content>
 </xwikidoc>
