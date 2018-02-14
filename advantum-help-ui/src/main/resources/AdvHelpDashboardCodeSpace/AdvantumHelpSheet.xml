@@ -10,18 +10,17 @@
   <parent>AdvHelpDashboardCodeSpace.AdvantumHelpClass</parent>
   <author>XWiki.admin</author>
   <contentAuthor>XWiki.admin</contentAuthor>
-  <date>1518564401000</date>
-  <contentUpdateDate>1518564381000</contentUpdateDate>
-  <version>1.17</version>
+  <date>1518624197000</date>
+  <contentUpdateDate>1518624183000</contentUpdateDate>
+  <version>2.1</version>
   <title>#if($doc.name == 'AdvantumHelpSheet')AdvantumHelpSheet#{else}$services.display.title($doc, {'displayerHint':    'default'})#end  </title>
   <comment/>
-  <minorEdit>true</minorEdit>
+  <minorEdit>false</minorEdit>
   <syntaxId>xwiki/2.1</syntaxId>
   <hidden>true</hidden>
   <content>{{groovy}}&#xd;
     String space = doc.getSpace();&#xd;
-    String title = doc.getTitle();&#xd;
-    String fullPath = space.replace(".WebHome", "").concat(".").concat(title);&#xd;
+    String fullPath = space.replace(".WebHome", "");&#xd;
     String[] split = fullPath.replace("\\.", "{#}").split("\\.");&#xd;
     String newUUID = "";&#xd;
     for (int i = 0; i &lt; split.length; i++) {&#xd;
